@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartLine", "SmartLine\SmartLine.csproj", "{1106589B-093C-4E48-B75D-38B9286D0B9D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abstractions", "Abstractions\Abstractions.csproj", "{533354C5-48F8-4C98-8161-37221D52171B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAndLogModule", "ConsoleAndLogModule\ConsoleAndLogModule.csproj", "{9BC49FBD-0A5B-452B-8381-3E39FCA1AC98}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1106589B-093C-4E48-B75D-38B9286D0B9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1106589B-093C-4E48-B75D-38B9286D0B9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1106589B-093C-4E48-B75D-38B9286D0B9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1106589B-093C-4E48-B75D-38B9286D0B9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{533354C5-48F8-4C98-8161-37221D52171B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{533354C5-48F8-4C98-8161-37221D52171B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{533354C5-48F8-4C98-8161-37221D52171B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{533354C5-48F8-4C98-8161-37221D52171B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BC49FBD-0A5B-452B-8381-3E39FCA1AC98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BC49FBD-0A5B-452B-8381-3E39FCA1AC98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BC49FBD-0A5B-452B-8381-3E39FCA1AC98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BC49FBD-0A5B-452B-8381-3E39FCA1AC98}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

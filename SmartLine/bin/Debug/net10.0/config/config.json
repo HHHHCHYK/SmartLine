@@ -1,0 +1,8 @@
+{
+  "module_paths": [
+    "D:\\Code\\SmartLine\\SmartLine\\bin\\Debug\\net10.0\\Modules"
+  ],
+  "module_selectors": {
+    "IAlertEngine":"ConsoleAndLogModule"
+  }
+}
