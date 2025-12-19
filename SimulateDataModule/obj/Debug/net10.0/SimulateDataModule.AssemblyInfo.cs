@@ -10,12 +10,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("ConsoleAndLogModule")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("SimulateDataModule")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+068f5b356a398dafa11aa5fbdb4e274821b40f77")]
-[assembly: System.Reflection.AssemblyProductAttribute("ConsoleAndLogModule")]
-[assembly: System.Reflection.AssemblyTitleAttribute("ConsoleAndLogModule")]
+[assembly: System.Reflection.AssemblyProductAttribute("SimulateDataModule")]
+[assembly: System.Reflection.AssemblyTitleAttribute("SimulateDataModule")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // 由 MSBuild WriteCodeFragment 类生成。

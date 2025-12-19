@@ -1,24 +1,27 @@
-﻿namespace Abstractions.Events;
+﻿using System;
+
+namespace Abstractions.Events;
 
 public interface IEvent
 {
 }
 
-public class DataCollectedEvent : IEvent
+
+/// <summary>
+/// 发布数据收集开始数据
+/// </summary>
+public class DataCollectControl(bool enable) : IEvent
 {
+    public bool IsEnabled { get; } = enable;
 }
 
-public class AnalysisResultEvent : IEvent
+public class DataCollectedEvent() : IEvent
 {
+    
 }
-
-public class WarningEvent : IEvent
-{
-}
-
-public class MessagePublishEvent : IEvent
-{
-}
+public class AnalysisResultEvent : IEvent;
+public class WarningEvent : IEvent;
+public class MessagePublishEvent : IEvent;
 
 public class LogEvent(LogLevel logLevel, string message) : IEvent
 {

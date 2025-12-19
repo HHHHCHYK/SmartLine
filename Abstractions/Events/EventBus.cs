@@ -1,4 +1,6 @@
-﻿namespace Abstractions.Events;
+﻿using System;
+
+namespace Abstractions.Events;
 
 public interface IEventBus
 {
