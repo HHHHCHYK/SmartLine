@@ -1,32 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Code\\SmartLine\\SmartLine\\SmartLine.csproj": {}
+    "/Users/hykal/Desktop/SmartLine/SmartLine/SmartLine/SmartLine.csproj": {}
   },
   "projects": {
-    "D:\\Code\\SmartLine\\Abstractions\\Abstractions.csproj": {
+    "/Users/hykal/Desktop/SmartLine/SmartLine/Abstractions/Abstractions.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Code\\SmartLine\\Abstractions\\Abstractions.csproj",
+        "projectUniqueName": "/Users/hykal/Desktop/SmartLine/SmartLine/Abstractions/Abstractions.csproj",
         "projectName": "Abstractions",
-        "projectPath": "D:\\Code\\SmartLine\\Abstractions\\Abstractions.csproj",
-        "packagesPath": "C:\\Users\\HHHHCHYK\\.nuget\\packages\\",
-        "outputPath": "D:\\Code\\SmartLine\\Abstractions\\obj\\",
+        "projectPath": "/Users/hykal/Desktop/SmartLine/SmartLine/Abstractions/Abstractions.csproj",
+        "packagesPath": "/Users/hykal/.nuget/packages/",
+        "outputPath": "/Users/hykal/Desktop/SmartLine/SmartLine/Abstractions/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\HHHHCHYK\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/hykal/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -66,7 +59,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "/Users/hykal/.dotnet/sdk/10.0.101/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -344,37 +337,30 @@
         }
       }
     },
-    "D:\\Code\\SmartLine\\SmartLine\\SmartLine.csproj": {
+    "/Users/hykal/Desktop/SmartLine/SmartLine/SmartLine/SmartLine.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Code\\SmartLine\\SmartLine\\SmartLine.csproj",
+        "projectUniqueName": "/Users/hykal/Desktop/SmartLine/SmartLine/SmartLine/SmartLine.csproj",
         "projectName": "SmartLine",
-        "projectPath": "D:\\Code\\SmartLine\\SmartLine\\SmartLine.csproj",
-        "packagesPath": "C:\\Users\\HHHHCHYK\\.nuget\\packages\\",
-        "outputPath": "D:\\Code\\SmartLine\\SmartLine\\obj\\",
+        "projectPath": "/Users/hykal/Desktop/SmartLine/SmartLine/SmartLine/SmartLine.csproj",
+        "packagesPath": "/Users/hykal/.nuget/packages/",
+        "outputPath": "/Users/hykal/Desktop/SmartLine/SmartLine/SmartLine/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\HHHHCHYK\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/hykal/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net10.0": {
             "targetAlias": "net10.0",
             "projectReferences": {
-              "D:\\Code\\SmartLine\\Abstractions\\Abstractions.csproj": {
-                "projectPath": "D:\\Code\\SmartLine\\Abstractions\\Abstractions.csproj"
+              "/Users/hykal/Desktop/SmartLine/SmartLine/Abstractions/Abstractions.csproj": {
+                "projectPath": "/Users/hykal/Desktop/SmartLine/SmartLine/Abstractions/Abstractions.csproj"
               }
             }
           }
@@ -410,7 +396,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "/Users/hykal/.dotnet/sdk/10.0.101/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",

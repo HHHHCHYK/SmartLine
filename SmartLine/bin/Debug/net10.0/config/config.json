@@ -1,8 +1,13 @@
 {
   "module_paths": [
-    "D:\\Code\\SmartLine\\SmartLine\\bin\\Debug\\net10.0\\Modules"
+    "./Modules",
+    "...../ConsoleAndLogModule/bin/Debug/net10.0",
+    "...../SimulateDataModule/bin/Debug/net10.0",
+    "...../TemperatureAlarmModule/bin/Debug/net10.0"
   ],
   "module_selectors": {
-    "IAlertEngine":"ConsoleAndLogModule"
+    "IAlertEngine":"ConsoleAndLogModule",
+    "IDataCollector":"SimulationDataCollectorModule",
+    "IDataAnalyzer":"TemperatureAlarmModule"
   }
 }

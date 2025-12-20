@@ -1,14 +1,15 @@
 namespace Abstractions.Data;
 
-public record CollectedData
+public class CollectedData
 {
-    public string DeviceId { get; }
-    public bool Running { get; }
-    public float Speed { get; }
-    public float Load { get; }
-    public float RunningTime { get; }
+    public required string DeviceId { get; set; }
+    public bool Running { get; set; }
+    public float Speed { get; set; }
+    public float Load { get; set; }
+    public float RunningTime { get; set; }
     
-    public float Temperature { get; }
-    public float Humidity { get; }
-    public float SmokeConcentration { get; }
+    public float Temperature { get; set; }
+    public float Humidity { get; set; }
+    public float SmokeConcentration { get; set; }
+    public float Pressure { get; set; }
 }

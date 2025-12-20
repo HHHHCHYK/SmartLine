@@ -1,0 +1,16 @@
+/Users/hykal/Desktop/SmartLine/SmartLine/TemperatureAlarmModule/bin/Debug/net10.0/TemperatureAlarmModule.deps.json
+/Users/hykal/Desktop/SmartLine/SmartLine/TemperatureAlarmModule/bin/Debug/net10.0/TemperatureAlarmModule.dll
+/Users/hykal/Desktop/SmartLine/SmartLine/TemperatureAlarmModule/bin/Debug/net10.0/TemperatureAlarmModule.pdb
+/Users/hykal/Desktop/SmartLine/SmartLine/TemperatureAlarmModule/bin/Debug/net10.0/Abstractions.dll
+/Users/hykal/Desktop/SmartLine/SmartLine/TemperatureAlarmModule/bin/Debug/net10.0/Abstractions.pdb
+/Users/hykal/Desktop/SmartLine/SmartLine/TemperatureAlarmModule/obj/Debug/net10.0/TemperatureAlarmModule.csproj.AssemblyReference.cache
+/Users/hykal/Desktop/SmartLine/SmartLine/TemperatureAlarmModule/obj/Debug/net10.0/TemperatureAlarmModule.GeneratedMSBuildEditorConfig.editorconfig
+/Users/hykal/Desktop/SmartLine/SmartLine/TemperatureAlarmModule/obj/Debug/net10.0/TemperatureAlarmModule.AssemblyInfoInputs.cache
+/Users/hykal/Desktop/SmartLine/SmartLine/TemperatureAlarmModule/obj/Debug/net10.0/TemperatureAlarmModule.AssemblyInfo.cs
+/Users/hykal/Desktop/SmartLine/SmartLine/TemperatureAlarmModule/obj/Debug/net10.0/TemperatureAlarmModule.csproj.CoreCompileInputs.cache
+/Users/hykal/Desktop/SmartLine/SmartLine/TemperatureAlarmModule/obj/Debug/net10.0/TemperatureAlarmModule.sourcelink.json
+/Users/hykal/Desktop/SmartLine/SmartLine/TemperatureAlarmModule/obj/Debug/net10.0/Temperat.062DB47C.Up2Date
+/Users/hykal/Desktop/SmartLine/SmartLine/TemperatureAlarmModule/obj/Debug/net10.0/TemperatureAlarmModule.dll
+/Users/hykal/Desktop/SmartLine/SmartLine/TemperatureAlarmModule/obj/Debug/net10.0/refint/TemperatureAlarmModule.dll
+/Users/hykal/Desktop/SmartLine/SmartLine/TemperatureAlarmModule/obj/Debug/net10.0/TemperatureAlarmModule.pdb
+/Users/hykal/Desktop/SmartLine/SmartLine/TemperatureAlarmModule/obj/Debug/net10.0/ref/TemperatureAlarmModule.dll

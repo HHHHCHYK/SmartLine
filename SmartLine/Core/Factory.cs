@@ -14,7 +14,7 @@ public static class Factory
 
     public static void LoadModule()
     {
-        MainEventBus.Instance.Publish(new LogEvent(LogLevel.Info,"开始加载模块"));
+        MainEventBus.Instance.Publish(new LogEvent(LogLevel.Info, "开始加载模块"));
         // 读取配置
         var config = LoadConfig();
 
@@ -23,7 +23,7 @@ public static class Factory
 
         // 创建对应模块的实例
         InstantiateModules(config, modules);
-        MainEventBus.Instance.Publish(new LogEvent(LogLevel.Info,"模块加载完毕"));
+        MainEventBus.Instance.Publish(new LogEvent(LogLevel.Info, "模块加载完毕"));
     }
 
     private static void InstantiateModules(ConfigData config, HashSet<Type> modules)
@@ -49,12 +49,12 @@ public static class Factory
             (m =>
                 {
                     // 获取属性
-                    var obj = m.GetCustomAttributes(typeof(ModuleAttribute),inherit:true);
-                    var attribute = obj.FirstOrDefault(o=>o is ModuleAttribute) as ModuleAttribute;
+                    var obj = m.GetCustomAttributes(typeof(ModuleAttribute), inherit: true);
+                    var attribute = obj.FirstOrDefault(o => o is ModuleAttribute) as ModuleAttribute;
                     // 属性判空
-                    if (attribute == null ) return false;
+                    if (attribute == null) return false;
                     // 判断属性值
-                    if(attribute.ModuleName != moduleName)return false;
+                    if (attribute.ModuleName != moduleName) return false;
                     // 判断是否是目标接口的实现
                     return targetInterface.IsAssignableFrom(m);
                 }
@@ -65,9 +65,9 @@ public static class Factory
                 var baseAttributes = Attribute.GetCustomAttributes(m);
                 var attribute = baseAttributes.FirstOrDefault() as ModuleAttribute;
                 // 属性判空
-                if (attribute == null ) continue;
+                if (attribute == null) continue;
                 // 判断属性值
-                if(attribute.ModuleName != moduleName)continue;
+                if (attribute.ModuleName != moduleName) continue;
                 //判断是否是目标接口的实现
                 if (targetInterface.IsAssignableFrom(m))
                 {
@@ -75,19 +75,20 @@ public static class Factory
                     break;
                 }
             }
+
             if (targetModule == null) // 如果获取失败
             {
-                MainEventBus.Instance.Publish(new LogEvent(LogLevel.Warning,"配置中的程序集缺失"));
+                MainEventBus.Instance.Publish(new LogEvent(LogLevel.Warning, "配置中的程序集缺失"));
                 return;
-            }  
-            
+            }
+
             // 创建实例
             var obj = Activator.CreateInstance(
                 targetModule,
                 MainEventBus.Instance
-                );
-            if(obj == null || !(obj is IModule && targetInterface.IsInstanceOfType(obj)))return;
-            ModuleInstances.Add(targetInterface,obj);
+            );
+            if (obj == null || !(obj is IModule && targetInterface.IsInstanceOfType(obj))) return;
+            ModuleInstances.Add(targetInterface, obj);
         }
     }
 
@@ -99,7 +100,8 @@ public static class Factory
         if (AbstractionsAssembly == null)
         {
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-            var abstractionsAssembly = assemblies.FirstOrDefault(a => a.GetName().Name?.EndsWith(nameof(Abstractions)) == true);
+            var abstractionsAssembly =
+                assemblies.FirstOrDefault(a => a.GetName().Name?.EndsWith(nameof(Abstractions)) == true);
             if (abstractionsAssembly == null) throw new InvalidOperationException();
             AbstractionsAssembly = abstractionsAssembly;
         }
@@ -117,17 +119,17 @@ public static class Factory
     private static HashSet<Type> GetModules(ConfigData config)
     {
         HashSet<Type> ret = new();
-        
+
         //注册加载器
         RegisteringAssemblyResolveCallback();
-        
+
         foreach (var path in config.ModulePaths)
         {
             // 将相对路径转换成绝对路径
-            var fullPath = Path.GetFullPath(path);
+            var fullPath = GetFullPath(path);
             
             if (!Directory.Exists(fullPath)) continue; //验证路径
-            
+
             var files = Directory.GetFiles(fullPath, "*.dll"); //读取路径下所有dll文件
             foreach (var file in files) //遍历加载所有dll文件
             {
@@ -157,17 +159,48 @@ public static class Factory
         {
             // 1. 存放公共 DLL 的“核心目录”
             string baseDir = AppDomain.CurrentDomain.BaseDirectory;
-            
+
             // 2. 拼接出可能的路径
             string expectedPath = Path.Combine(baseDir, $"{assemblyName.Name}.dll");
-            
+
             // 3. 如果文件确实在根目录，就手动喂给加载器
             if (File.Exists(expectedPath))
             {
                 return context.LoadFromAssemblyPath(expectedPath);
             }
+
             return null;
         };
+    }
+
+    private static string GetFullPath(string path)
+    {
+        // 如果是绝对路径，直接返回
+        if (Path.IsPathFullyQualified(path))
+            return path;
+        // 如非，转换成绝对路径
+        else
+        {
+            var absoluteDirectoryPath = AppDomain.CurrentDomain.BaseDirectory;
+            var aPathLength = absoluteDirectoryPath.Length;
+            
+            // 判断路径深度
+            var index = path.IndexOf('/');
+            // 如果只有单层路径
+            if (index <= 0)return Path.Combine(absoluteDirectoryPath, path);
+            
+            // 如果是更复杂的情况
+            if (!path.StartsWith('.'))  //  如果不以.开头，代表目录不需要回溯
+            {
+                return  Path.Combine(absoluteDirectoryPath, path);
+            }
+            else // 如果以"."开头，则按数量回溯
+            {
+                
+            }
+            
+            return Path.GetFullPath(path);
+        }
     }
 
     private static ConfigData LoadConfig()
