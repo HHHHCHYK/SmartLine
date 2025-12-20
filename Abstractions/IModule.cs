@@ -4,6 +4,7 @@ namespace Abstractions;
 
 public interface IModule
 {
+    string ModuleName { get; }
     void Initialize();
     void Start();
     void Stop();

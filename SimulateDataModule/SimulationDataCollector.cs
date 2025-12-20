@@ -14,6 +14,7 @@ public class SimulationDataCollector : IModule, IDataCollector
     public IEventBus EventBus { get; }
     private static readonly Random Random = new Random();
 
+    public string ModuleName => nameof(SimulationDataCollector);
 
     /// <summary>
     /// 基准值
@@ -33,22 +34,23 @@ public class SimulationDataCollector : IModule, IDataCollector
     /// <summary>
     /// 错误发生率
     /// </summary>
-    public float ErrorRate = 0.1f;
+    public float ErrorRate = 0.5f;
 
 
     public SimulationDataCollector(IEventBus eventBus)
     {
         EventBus = eventBus;
+        Initialize();
+        EventBus.Publish(LogEvent.Info(nameof(SimulationDataCollector) + "：模块加载成功"));
     }
 
     public void Initialize()
     {
-        EventBus.Subscribe<DataCollectControl>((startEvent) =>
+        EventBus.Subscribe<DataCollectController>(startEvent =>
         {
             if (startEvent.IsEnabled) Start();
             else Stop();
         });
-        EventBus.Publish(new LogEvent(LogLevel.Info, nameof(SimulateDataModule) + " initialized"));
     }
 
     private CancellationTokenSource? _cts;
@@ -58,26 +60,36 @@ public class SimulationDataCollector : IModule, IDataCollector
     {
         _cts = new CancellationTokenSource();
         _simulateDataTask = StartDatSimulate(_cts.Token);
+        EventBus.Publish(LogEvent.Info(ModuleName + "：模块开始运转"));
     }
 
     public void Stop()
     {
         _cts?.Cancel();
+        EventBus.Publish(LogEvent.Info(ModuleName + "：模块停止运转"));
     }
 
     private async Task StartDatSimulate(CancellationToken ct)
     {
-        while (ct.IsCancellationRequested == false)
+        while (!ct.IsCancellationRequested)
         {
-            // 程序生成模拟值
-            float data = SpawnSimulateDataOnce();
-            CollectedData cd = new()
+            try
             {
-                DeviceId = DateTime.Now.Ticks
-                    .GetHashCode().ToString(),
-                Temperature = data
-            };
-            EventBus.Publish(new DataCollectedEvent(cd));
+                // 程序生成模拟值
+                float data = SpawnSimulateDataOnce();
+                CollectedData cd = new()
+                {
+                    DeviceId = DateTime.Now.Ticks
+                        .GetHashCode().ToString(),
+                    Temperature = data
+                };
+                EventBus.Publish(new DataCollectedEvent(cd));
+                EventBus.Publish(LogEvent.Info(ModuleName + "数据生成完毕"));
+            }
+            catch (Exception e)
+            {
+                EventBus.Publish(new LogEvent(LogLevel.Error,e.Message));
+            }
             await Task.Delay(1000, ct);
         }
     }
@@ -87,12 +99,9 @@ public class SimulationDataCollector : IModule, IDataCollector
         double randomDouble = Random.NextDouble();
         if (randomDouble > ErrorRate) //随机到正常数值
         {
-            float realData = (float)(Random.NextDouble() * NormalRateRange * BaseData);
+            float realData = (float)((Random.NextDouble() + 0.5) * NormalRateRange * BaseData + BaseData);
             return realData;
         }
-        else
-        {
-            return (float)(Random.NextDouble() * ErrorRateRange * BaseData);
-        }
+        return (float)((Random.NextDouble() + 0.5) * ErrorRate * BaseData + BaseData);
     }
 }

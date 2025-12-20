@@ -14,15 +14,17 @@ public class ConsoleAndLogModule : IModule, IAlertEngine
     }
     public IEventBus EventBus { get; }
 
+    public string ModuleName => nameof(ConsoleAndLogModule);
+
     public void Initialize()
     {
         Start();    //Debug：初始化后立刻启动
+        EventBus.Publish(LogEvent.Info(nameof(ConsoleAndLogModule) + "：模块加载成功"));
     }
 
     public void Start()
     {
         EventBus.Subscribe<LogEvent>(LogEventFunc);
-        EventBus.Publish(new LogEvent(LogLevel.Info,$"{nameof(ConsoleAndLogModule)} 启动"));
     }
 
     public void Stop()

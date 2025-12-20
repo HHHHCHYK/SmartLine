@@ -11,7 +11,12 @@ public interface IEvent
 /// 发布数据收集开始数据
 /// </summary>
 // ReSharper disable once ClassNeverInstantiated.Global
-public class DataCollectControl(bool enable) : IEvent
+public class DataCollectController(bool enable) : IEvent
+{
+    public bool IsEnabled { get; } = enable;
+}
+
+public class DataAnalyzerController(bool enable) : IEvent
 {
     public bool IsEnabled { get; } = enable;
 }
@@ -21,7 +26,10 @@ public class DataCollectedEvent(CollectedData data) : IEvent
     public CollectedData Data { get; } = data;
 }
 
-public class AnalysisResultEvent : IEvent;
+public class AnalysisResultEvent(CollectedData data) : IEvent
+{
+    public CollectedData Data { get; } = data;
+}
 
 public class WarningEvent(string message) : IEvent
 {
@@ -47,5 +55,10 @@ public class LogEvent(LogLevel logLevel, string message) : IEvent
     public override string ToString()
     {
         return $"[{LogLevel}]: {Message} -----{_createdTimeStamp}";
+    }
+
+    public static LogEvent Info(string message)
+    {
+        return new LogEvent(LogLevel.Info, message);
     }
 }

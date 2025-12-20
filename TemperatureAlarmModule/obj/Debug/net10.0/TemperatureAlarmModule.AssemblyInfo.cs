@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TemperatureAlarmModule")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e0620d535b263517460c17ae7c60d00fec1eddde")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+63e4312458a50fb426d1647ec42f5365bc9f5664")]
 [assembly: System.Reflection.AssemblyProductAttribute("TemperatureAlarmModule")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TemperatureAlarmModule")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

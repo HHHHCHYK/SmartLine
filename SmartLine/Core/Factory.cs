@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using System.Runtime.Loader;
+using System.Text;
 using Abstractions;
 using Abstractions.Attributes;
 using Abstractions.Events;
@@ -78,7 +79,7 @@ public static class Factory
 
             if (targetModule == null) // 如果获取失败
             {
-                MainEventBus.Instance.Publish(new LogEvent(LogLevel.Warning, "配置中的程序集缺失"));
+                MainEventBus.Instance.Publish(new LogEvent(LogLevel.Warning, "配置中的程序集缺失" + moduleName));
                 return;
             }
 
@@ -125,9 +126,11 @@ public static class Factory
 
         foreach (var path in config.ModulePaths)
         {
+            // 将路径分隔符换成当前操作系统的路径分隔符
+
             // 将相对路径转换成绝对路径
-            var fullPath = GetFullPath(path);
-            
+            var fullPath = Path.GetFullPath(path);
+
             if (!Directory.Exists(fullPath)) continue; //验证路径
 
             var files = Directory.GetFiles(fullPath, "*.dll"); //读取路径下所有dll文件
@@ -135,13 +138,20 @@ public static class Factory
             {
                 if (string.IsNullOrEmpty(file)) continue; //保证文件名有效
                 if (file.EndsWith("Abstractions.dll")) continue;
-                Assembly moduleType = AssemblyLoadContext.Default.LoadFromAssemblyPath(file); //加载程序集
-                var types = moduleType.GetTypes();
-                foreach (var type in types) //筛选
+                try
                 {
-                    if (!typeof(IModule).IsAssignableFrom(type)) continue;
-                    if (type.IsInterface || type.IsAbstract) continue;
-                    ret.Add(type);
+                    Assembly moduleType = AssemblyLoadContext.Default.LoadFromAssemblyPath(file); //加载程序集
+                    var types = moduleType.GetTypes();
+                    foreach (var type in types) //筛选
+                    {
+                        if (!typeof(IModule).IsAssignableFrom(type)) continue;
+                        if (type.IsInterface || type.IsAbstract) continue;
+                        ret.Add(type);
+                    }
+                }
+                catch (FileLoadException fle)
+                {
+                    MainEventBus.Instance.PublishByException(fle);
                 }
             }
         }
@@ -173,34 +183,53 @@ public static class Factory
         };
     }
 
+    private static string PathAdaptationOS(string path)
+    {
+        path = path.Replace('/', Path.DirectorySeparatorChar);
+        path = path.Replace('\\', Path.DirectorySeparatorChar);
+        return path;
+    }
+
     private static string GetFullPath(string path)
     {
         // 如果是绝对路径，直接返回
         if (Path.IsPathFullyQualified(path))
             return path;
+
+
         // 如非，转换成绝对路径
-        else
+        var absoluteDirectoryPath = AppDomain.CurrentDomain.BaseDirectory;
+        var absoluteDirectoryParts =
+            absoluteDirectoryPath.Split(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+        var aPathLength = absoluteDirectoryParts.Length;
+
+        // 判断路径深度
+        var index = path.IndexOf('/');
+        // 如果只有单层路径
+        if (index <= 0) return Path.Combine(absoluteDirectoryPath, path);
+
+        // 如果是更复杂的情况
+        if (!path.StartsWith('.')) //  如果不以.开头，代表目录不需要回溯
         {
-            var absoluteDirectoryPath = AppDomain.CurrentDomain.BaseDirectory;
-            var aPathLength = absoluteDirectoryPath.Length;
-            
-            // 判断路径深度
-            var index = path.IndexOf('/');
-            // 如果只有单层路径
-            if (index <= 0)return Path.Combine(absoluteDirectoryPath, path);
-            
-            // 如果是更复杂的情况
-            if (!path.StartsWith('.'))  //  如果不以.开头，代表目录不需要回溯
-            {
-                return  Path.Combine(absoluteDirectoryPath, path);
-            }
-            else // 如果以"."开头，则按数量回溯
-            {
-                
-            }
-            
-            return Path.GetFullPath(path);
+            return Path.Combine(absoluteDirectoryPath, path);
         }
+
+        // 如果以"."开头，则按数量回溯
+        aPathLength -= index;
+
+        // 将路径前端的"."清除
+        string realPath = path.Substring(index);
+
+        StringBuilder builder = new();
+        for (int i = 0; i < aPathLength; i++)
+        {
+            if (i > 0) builder.Append('/');
+            builder.Append(absoluteDirectoryParts[i]);
+        }
+
+        builder.Append(realPath);
+
+        return builder.ToString();
     }
 
     private static ConfigData LoadConfig()
