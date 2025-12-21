@@ -29,7 +29,7 @@ public class SimulationDataCollector : IModule, IDataCollector
     /// <summary>
     /// 错误时变化率
     /// </summary>
-    public float ErrorRateRange = 0.5f;
+    public float ErrorRateRange = 0.2f;
 
     /// <summary>
     /// 错误发生率

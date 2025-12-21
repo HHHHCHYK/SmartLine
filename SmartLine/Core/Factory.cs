@@ -32,17 +32,17 @@ public static class Factory
         var moduleSelectors = config.ModuleSelectors;
 
         // 为每一个功能接口加载模块
-        foreach (var selectorsKey in moduleSelectors.Keys)
+        foreach (var selectorsKey in config.ModuleSelectors.GetKeys())
         {
             // 如果Key的Value为空值
-            if (string.IsNullOrEmpty(moduleSelectors[selectorsKey]))
+            if (string.IsNullOrEmpty(selectorsKey))
             {
                 MainEventBus.Instance.Publish(new LogEvent(LogLevel.Warning, "模块对应的配置项为空"));
                 continue;
             }
 
             // 读取ModuleName和目标接口类型（由Key定义）
-            var moduleName = moduleSelectors[selectorsKey];
+            var moduleName = config.ModuleSelectors.GetNewValue(selectorsKey);
             var targetInterface = GetModuleInterfaceByName(selectorsKey);
 
             // 遍历modules，查找目标type
@@ -64,7 +64,7 @@ public static class Factory
             foreach (var m in modules)
             {
                 var baseAttributes = Attribute.GetCustomAttributes(m);
-                var attribute = baseAttributes.FirstOrDefault() as ModuleAttribute;
+                var attribute = baseAttributes.FirstOrDefault(attribute1 => attribute1 is ModuleAttribute) as ModuleAttribute;
                 // 属性判空
                 if (attribute == null) continue;
                 // 判断属性值
@@ -93,22 +93,22 @@ public static class Factory
         }
     }
 
-    private static Assembly? AbstractionsAssembly;
+    private static Assembly? _abstractionsAssembly;
 
     private static Type GetModuleInterfaceByName(string name)
     {
         // 若还未获取契约程序集，先获取
-        if (AbstractionsAssembly == null)
+        if (_abstractionsAssembly == null)
         {
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
             var abstractionsAssembly =
                 assemblies.FirstOrDefault(a => a.GetName().Name?.EndsWith(nameof(Abstractions)) == true);
             if (abstractionsAssembly == null) throw new InvalidOperationException();
-            AbstractionsAssembly = abstractionsAssembly;
+            _abstractionsAssembly = abstractionsAssembly;
         }
 
         // 获取程序集中的类
-        var type = AbstractionsAssembly.GetType($"{nameof(Abstractions)}.{name}");
+        var type = _abstractionsAssembly.GetType($"{nameof(Abstractions)}.{name}");
         if (type is not { IsInterface: true }) throw new InvalidOperationException();
         return type;
     }

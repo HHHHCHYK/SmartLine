@@ -1,0 +1,24 @@
+{
+  "module_paths": [
+    "./Modules",
+    "../../../../ConsoleAndLogModule/bin/Debug/net10.0",
+    "../../../../SimulateDataModule/bin/Debug/net10.0",
+    "../../../../TemperatureAlarmModule/bin/Debug/net10.0",
+    "../../../../ConsoleAndLogModule/bin/Debug/net10.0",
+    "../../../..//LogWriter/bin/Debug/net10.0"
+  ],
+  "module_selectors": [
+    {
+      "Interface":"INotifier",
+      "ModuleName":"ConsoleAndLogModule"
+    },
+    {
+      "Interface":"IDataCollector",
+      "ModuleName":"SimulationDataCollectorModule"
+    },
+    {
+      "Interface":"IDataAnalyzer",
+      "ModuleName":"TemperatureAlarmModule"
+    }
+  ]
+}

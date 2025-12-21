@@ -5,8 +5,6 @@ using SmartLine;
 
 Factory.LoadModule();
 
-Console.WriteLine("Hello，Myself");
-
 while (true)
 {
     var read = Console.ReadLine();

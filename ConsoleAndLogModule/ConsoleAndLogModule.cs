@@ -5,7 +5,7 @@ using Abstractions.Events;
 namespace ConsoleAndLogModule;
 
 [Module("ConsoleAndLogModule")]
-public class ConsoleAndLogModule : IModule, IAlertEngine
+public class ConsoleAndLogModule : IModule, INotifier
 {
     public ConsoleAndLogModule(IEventBus eventBus)
     {

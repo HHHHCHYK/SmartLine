@@ -1,0 +1,16 @@
+/Users/hykal/Desktop/SmartLine/SmartLine/LogWriter/bin/Debug/net10.0/LogWriter.deps.json
+/Users/hykal/Desktop/SmartLine/SmartLine/LogWriter/bin/Debug/net10.0/LogWriter.dll
+/Users/hykal/Desktop/SmartLine/SmartLine/LogWriter/bin/Debug/net10.0/LogWriter.pdb
+/Users/hykal/Desktop/SmartLine/SmartLine/LogWriter/bin/Debug/net10.0/Abstractions.dll
+/Users/hykal/Desktop/SmartLine/SmartLine/LogWriter/bin/Debug/net10.0/Abstractions.pdb
+/Users/hykal/Desktop/SmartLine/SmartLine/LogWriter/obj/Debug/net10.0/LogWriter.csproj.AssemblyReference.cache
+/Users/hykal/Desktop/SmartLine/SmartLine/LogWriter/obj/Debug/net10.0/LogWriter.GeneratedMSBuildEditorConfig.editorconfig
+/Users/hykal/Desktop/SmartLine/SmartLine/LogWriter/obj/Debug/net10.0/LogWriter.AssemblyInfoInputs.cache
+/Users/hykal/Desktop/SmartLine/SmartLine/LogWriter/obj/Debug/net10.0/LogWriter.AssemblyInfo.cs
+/Users/hykal/Desktop/SmartLine/SmartLine/LogWriter/obj/Debug/net10.0/LogWriter.csproj.CoreCompileInputs.cache
+/Users/hykal/Desktop/SmartLine/SmartLine/LogWriter/obj/Debug/net10.0/LogWriter.sourcelink.json
+/Users/hykal/Desktop/SmartLine/SmartLine/LogWriter/obj/Debug/net10.0/LogWriter.csproj.Up2Date
+/Users/hykal/Desktop/SmartLine/SmartLine/LogWriter/obj/Debug/net10.0/LogWriter.dll
+/Users/hykal/Desktop/SmartLine/SmartLine/LogWriter/obj/Debug/net10.0/refint/LogWriter.dll
+/Users/hykal/Desktop/SmartLine/SmartLine/LogWriter/obj/Debug/net10.0/LogWriter.pdb
+/Users/hykal/Desktop/SmartLine/SmartLine/LogWriter/obj/Debug/net10.0/ref/LogWriter.dll

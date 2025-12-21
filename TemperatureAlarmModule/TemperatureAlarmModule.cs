@@ -8,7 +8,7 @@ namespace TemperatureAlarmModule;
 [Module("TemperatureAlarmModule")]
 public class TemperatureAlarmModule : IModule, IDataAnalyzer
 {
-    public bool IsEnabled { get; private set; } = false;
+    private bool IsEnabled { get; set; } = false;
     public string ModuleName => nameof(TemperatureAlarmModule);
 
     public TemperatureAlarmModule(IEventBus eventBus)
