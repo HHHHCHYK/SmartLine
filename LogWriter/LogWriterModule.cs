@@ -1,9 +1,11 @@
 ﻿using System.Text.Json;
 using Abstractions;
+using Abstractions.Attributes;
 using Abstractions.Events;
 
 namespace LogWriter;
 
+[Module("LogWriterModule")]
 public class LogWriterModule : IModule, INotifier
 {
     public string ModuleName => nameof(LogWriterModule);
@@ -44,6 +46,13 @@ public class LogWriterModule : IModule, INotifier
     private void OnLog(LogEvent logEvent)
     {
         if (!IsStarted) return;
+        if (FileStream == null)
+        {
+            EventBus.Publish(LogEvent.Info(ModuleName+"：文件未打开，日志写入失败"));
+            return;
+        }
+        
+        FileStream.
     }
 
     public void Start()

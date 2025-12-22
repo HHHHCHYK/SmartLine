@@ -22,3 +22,15 @@ D:/Code/SmartLine/Abstractions/obj/Debug/net10.0/ref/Abstractions.dll
 /Users/hykal/Desktop/SmartLine/SmartLine/Abstractions/obj/Debug/net10.0/Abstractions.pdb
 /Users/hykal/Desktop/SmartLine/SmartLine/Abstractions/obj/Debug/net10.0/ref/Abstractions.dll
 D:/Code/SmartLine/Abstractions/obj/Debug/net10.0/Abstractions.sourcelink.json
+D:\Code\SmartLine\Abstractions\bin\Debug\net10.0\Abstractions.deps.json
+D:\Code\SmartLine\Abstractions\bin\Debug\net10.0\Abstractions.dll
+D:\Code\SmartLine\Abstractions\bin\Debug\net10.0\Abstractions.pdb
+D:\Code\SmartLine\Abstractions\obj\Debug\net10.0\Abstractions.GeneratedMSBuildEditorConfig.editorconfig
+D:\Code\SmartLine\Abstractions\obj\Debug\net10.0\Abstractions.AssemblyInfoInputs.cache
+D:\Code\SmartLine\Abstractions\obj\Debug\net10.0\Abstractions.AssemblyInfo.cs
+D:\Code\SmartLine\Abstractions\obj\Debug\net10.0\Abstractions.csproj.CoreCompileInputs.cache
+D:\Code\SmartLine\Abstractions\obj\Debug\net10.0\Abstractions.sourcelink.json
+D:\Code\SmartLine\Abstractions\obj\Debug\net10.0\Abstractions.dll
+D:\Code\SmartLine\Abstractions\obj\Debug\net10.0\refint\Abstractions.dll
+D:\Code\SmartLine\Abstractions\obj\Debug\net10.0\Abstractions.pdb
+D:\Code\SmartLine\Abstractions\obj\Debug\net10.0\ref\Abstractions.dll

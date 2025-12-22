@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Text.Json.Serialization;
 using Abstractions.Events;
 
 namespace SmartLine.util;
@@ -75,10 +76,18 @@ public static class ConfigReader
     }
 }
 
-public class ConfigData(List<string> modulePaths, List<ModuleData> moduleData)
+public class ConfigData
 {
-    public List<string> ModulePaths { get; init; } = modulePaths;
-    public ModuleSelector ModuleSelectors { get; init; } = new ModuleSelector(moduleData);
+    public ConfigData(List<string> modulePaths, List<ModuleData> moduleData)
+    {
+        ModuleData = moduleData;
+        ModulePaths = modulePaths;
+        ModuleSelectors = new ModuleSelector(ModuleData);
+    }
+
+    public List<string> ModulePaths { get; init; }
+    public List<ModuleData> ModuleData { get; init; }
+    [JsonIgnore] public ModuleSelector ModuleSelectors { get; init; }
 }
 
 public class ModuleSelector(List<ModuleData> moduleSelectors)
@@ -98,13 +107,15 @@ public class ModuleSelector(List<ModuleData> moduleSelectors)
 
     public List<string> GetKeys()
     {
-        _keys = moduleSelectors.Select(s => s.Interface).ToList();
+        if (_keys == null)
+            _keys = moduleSelectors.Select(s => s.Interface).ToList();
         return _keys;
     }
 
     public List<string> GetModuleNamesEnumerator()
     {
-        _modules = moduleSelectors.Select(s => s.ModuleName).ToList();
+        if (_modules == null)
+            _modules = moduleSelectors.Select(s => s.ModuleName).ToList();
         return _modules;
     }
 }

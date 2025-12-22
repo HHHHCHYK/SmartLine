@@ -11,7 +11,7 @@ namespace SmartLine;
 public static class Factory
 {
     // ReSharper disable once CollectionNeverQueried.Local
-    private static Dictionary<Type, object> ModuleInstances { get; } = new();
+    private static Dictionary<object, Type> ModuleInstances { get; } = new();
 
     public static void LoadModule()
     {
@@ -27,6 +27,11 @@ public static class Factory
         MainEventBus.Instance.Publish(new LogEvent(LogLevel.Info, "模块加载完毕"));
     }
 
+    /// <summary>
+    /// 实例化被配置的模块
+    /// </summary>
+    /// <param name="config">配置文件数据，读取其中的ModuleData</param>
+    /// <param name="modules">文件夹中dll的集合</param>
     private static void InstantiateModules(ConfigData config, HashSet<Type> modules)
     {
         var moduleSelectors = config.ModuleSelectors;
@@ -37,7 +42,7 @@ public static class Factory
             // 如果Key的Value为空值
             if (string.IsNullOrEmpty(selectorsKey))
             {
-                MainEventBus.Instance.Publish(new LogEvent(LogLevel.Warning, "模块对应的配置项为空"));
+                MainEventBus.Instance.Publish(new LogEvent(LogLevel.Warning, "配置了未被定义的接口名称"));
                 continue;
             }
 
@@ -46,29 +51,19 @@ public static class Factory
             var targetInterface = GetModuleInterfaceByName(selectorsKey);
 
             // 遍历modules，查找目标type
-            var targetModule = modules.FirstOrDefault
-            (m =>
-                {
-                    // 获取属性
-                    var obj = m.GetCustomAttributes(typeof(ModuleAttribute), inherit: true);
-                    var attribute = obj.FirstOrDefault(o => o is ModuleAttribute) as ModuleAttribute;
-                    // 属性判空
-                    if (attribute == null) return false;
-                    // 判断属性值
-                    if (attribute.ModuleName != moduleName) return false;
-                    // 判断是否是目标接口的实现
-                    return targetInterface.IsAssignableFrom(m);
-                }
-            );
+            Type? targetModule = null;
 
             foreach (var m in modules)
             {
                 var baseAttributes = Attribute.GetCustomAttributes(m);
-                var attribute = baseAttributes.FirstOrDefault(attribute1 => attribute1 is ModuleAttribute) as ModuleAttribute;
+                var attribute =
+                    baseAttributes.FirstOrDefault(attribute1 => attribute1 is ModuleAttribute) as ModuleAttribute;
                 // 属性判空
                 if (attribute == null) continue;
+
                 // 判断属性值
                 if (attribute.ModuleName != moduleName) continue;
+
                 //判断是否是目标接口的实现
                 if (targetInterface.IsAssignableFrom(m))
                 {
@@ -89,7 +84,7 @@ public static class Factory
                 MainEventBus.Instance
             );
             if (obj == null || !(obj is IModule && targetInterface.IsInstanceOfType(obj))) return;
-            ModuleInstances.Add(targetInterface, obj);
+            ModuleInstances.Add(obj, targetInterface);
         }
     }
 
