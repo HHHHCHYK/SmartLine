@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Text;
+using System.Text.Json;
 using Abstractions;
 using Abstractions.Attributes;
 using Abstractions.Events;
@@ -12,6 +13,7 @@ public class LogWriterModule : IModule, INotifier
 
     // 模块状态控制
     private bool IsStarted { get; set; } = false;
+    private CancellationTokenSource _cancellationTokenSource;
 
     // 日志文件写入相关
     private FileStream? FileStream { get; set; } = null;
@@ -34,13 +36,17 @@ public class LogWriterModule : IModule, INotifier
     {
         if (FileStream != null)
         {
-            FileStream.Dispose();
+            FileStream?.Close();
+            FileStream?.Flush();
+            FileStream?.Dispose();
+            _cancellationTokenSource.Cancel();
         }
     }
 
     public void Initialize()
     {
         EventBus.Subscribe<LogEvent>(OnLog);
+        Start();
     }
 
     private void OnLog(LogEvent logEvent)
@@ -48,11 +54,13 @@ public class LogWriterModule : IModule, INotifier
         if (!IsStarted) return;
         if (FileStream == null)
         {
-            EventBus.Publish(LogEvent.Info(ModuleName+"：文件未打开，日志写入失败"));
+            EventBus.Publish(LogEvent.Info(ModuleName + "：文件未打开，日志写入失败"));
             return;
         }
-        
-        FileStream.
+
+        FileStream.Write("\n"u8);
+        FileStream.Write(Encoding.UTF8.GetBytes(logEvent.Message));
+        FileStream.Flush();
     }
 
     public void Start()
@@ -61,6 +69,7 @@ public class LogWriterModule : IModule, INotifier
         var config = GetConfig(); // 读取配置文件
         FileStream?.DisposeAsync();
         string path = Path.Combine(config.LogPath, LogFileName);
+        _cancellationTokenSource = new();
         // 还未存在文件
         if (!File.Exists(path))
         {
@@ -70,17 +79,20 @@ public class LogWriterModule : IModule, INotifier
         // 已经存在日志文件
         else
         {
-            FileStream = File.Open(path, FileMode.Append);
+            FileStream = File.Open(path, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);
         }
     }
 
     public void Stop()
     {
         IsStarted = false;
+        FileStream?.Close();
+        FileStream?.Flush();
         FileStream?.Dispose();
+        _cancellationTokenSource.Cancel();
     }
 
-    private static LogConfigData DefaultConfig => new LogConfigData("./logs");
+    private static LogConfigData DefaultConfig => new("./logs");
 
     private LogConfigData GetConfig()
     {
